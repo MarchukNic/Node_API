@@ -1,8 +1,11 @@
 //Initiallising node modules
-var express = require("express");
-var bodyParser = require("body-parser");
+const express = require("express");
+const bodyParser = require("body-parser");
 const sql = require("mssql");
-var app = express();
+const dbConfig = require("./db").dbConfig;  // Настройка подключения к бд MSSQL
+const port = require("./db").port;  // Порт API сервера
+
+const app = express();
 
 // Setting Base directory
 app.use(bodyParser.json()); // стандартный модуль, для парсинга JSON в запросах
@@ -20,18 +23,9 @@ app.use(function (req, res, next) {
 });
 
 //Setting up server
-var server = app.listen(process.env.PORT || 4000, function () {
-    var port = server.address().port;
+var server = app.listen(process.env.PORT || port, function () {
     console.log("App now running on port", port);
 });
-
-//Initiallising connection string
-var dbConfig = {
-    user: "111",
-    password: "111",
-    server: "HNBA101816\\SQLEXPRESS",
-    database: "DashBoard"
-};
 
 //Function to connect to database and execute query
 var executeQuery = function (res, query) {

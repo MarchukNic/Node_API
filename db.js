@@ -1,15 +1,12 @@
-// db.js 
-var mssql = require("mssql"); 
-var dbConfig = {
+const dbConfig = {
     user: '111',
     password: '111',
     server: 'HNBA101816\\SQLEXPRESS',
-    database: 'DashBoard'   
+    database: 'DashBoard'
 };
 
-var connection = mssql.connect(dbConfig, function (err) {
-    if (err)
-        throw err; 
-});
+const port = 4000;
 
-module.exports = connection; 
+module.exports = {
+    dbConfig, port
+}; 
